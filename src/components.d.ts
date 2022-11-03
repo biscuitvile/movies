@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MovieListItem {
-        "movie": { title: string, isEditing: boolean };
+        "movie": { title: string, year: string, isEditing: boolean };
     }
     interface MoviesList {
     }
@@ -62,7 +62,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MovieListItem {
-        "movie"?: { title: string, isEditing: boolean };
+        "movie"?: { title: string, year: string, isEditing: boolean };
     }
     interface MoviesList {
     }

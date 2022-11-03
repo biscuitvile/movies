@@ -6,25 +6,31 @@ import state from '../../store';
   shadow: true,
 })
 export class NewMovieForm {
-  newMovieInput!: HTMLInputElement;
+  newMovieTitleInput!: HTMLInputElement;
+  newMovieYearInput!: HTMLInputElement;
 
   addMovie() {
-    let title: string = this.newMovieInput.value;
-    this.newMovieInput.value = "";
+    let title: string = this.newMovieTitleInput.value;
+    let year: string = this.newMovieYearInput.value;
+    this.newMovieTitleInput.value = "";
+    this.newMovieYearInput.value = "";
 
     state.movies = [
       ...state.movies,
-      { title: title, isEditing: false }
+      { title: title, year: year, isEditing: false }
     ]
 
-    this.newMovieInput.focus();
+    this.newMovieTitleInput.focus();
   }
 
   render() {
     return <Host>
       <input type="text"
         autofocus
-        ref={ (el) => this.newMovieInput = el as HTMLInputElement }></input>
+        ref={ (el) => this.newMovieTitleInput = el as HTMLInputElement }></input>
+
+      <input type="text"
+        ref={ (el) => this.newMovieYearInput = el as HTMLInputElement }></input>
 
       <button type="submit" onClick={ () => this.addMovie() }>Add</button>
     </Host>
