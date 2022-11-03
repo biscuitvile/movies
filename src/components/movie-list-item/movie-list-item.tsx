@@ -1,4 +1,5 @@
 import { Component, Prop, h } from '@stencil/core';
+import state from '../../store';
 
 @Component({
   tag: 'movie-list-item',
@@ -25,6 +26,12 @@ export class MovieListItem {
     }
   }
 
+  deleteMovie() {
+    state.movies = state.movies.filter((movie) => {
+      return movie.title !== this.movie.title;
+    });
+  }
+
   render() {
     if (this.movie.isEditing) {
       return <li><input type="text" value={this.movie.title}
@@ -33,7 +40,11 @@ export class MovieListItem {
         ref={ (el) => this.newMovieYearInput = el as HTMLInputElement }></input>
         <button onClick={ () => this.save() }>Save</button></li>
     } else {
-      return <li>{this.movie.title} ({this.movie.year})<a href="javascript:void(0)" onClick={ () => this.setEditing() }>Edit</a></li>
+      return <li>
+        {this.movie.title} ({this.movie.year})
+        <a href="javascript:void(0)" onClick={ () => this.setEditing() }>Edit</a>
+        <a href="javascript:void(0)" onClick={ () => this.deleteMovie() }>Delete</a>
+      </li>
     }
   }
 }
