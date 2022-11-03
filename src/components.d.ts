@@ -22,6 +22,8 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface NewMovieForm {
+    }
 }
 declare global {
     interface HTMLMoviesListElement extends Components.MoviesList, HTMLStencilElement {
@@ -36,9 +38,16 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLNewMovieFormElement extends Components.NewMovieForm, HTMLStencilElement {
+    }
+    var HTMLNewMovieFormElement: {
+        prototype: HTMLNewMovieFormElement;
+        new (): HTMLNewMovieFormElement;
+    };
     interface HTMLElementTagNameMap {
         "movies-list": HTMLMoviesListElement;
         "my-component": HTMLMyComponentElement;
+        "new-movie-form": HTMLNewMovieFormElement;
     }
 }
 declare namespace LocalJSX {
@@ -58,9 +67,12 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface NewMovieForm {
+    }
     interface IntrinsicElements {
         "movies-list": MoviesList;
         "my-component": MyComponent;
+        "new-movie-form": NewMovieForm;
     }
 }
 export { LocalJSX as JSX };
@@ -69,6 +81,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "movies-list": LocalJSX.MoviesList & JSXBase.HTMLAttributes<HTMLMoviesListElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "new-movie-form": LocalJSX.NewMovieForm & JSXBase.HTMLAttributes<HTMLNewMovieFormElement>;
         }
     }
 }
