@@ -1,4 +1,4 @@
-import { Component, State, h } from '@stencil/core';
+import { Component, Host, h } from '@stencil/core';
 import state from '../../store';
 
 @Component({
@@ -6,11 +6,13 @@ import state from '../../store';
   shadow: true,
 })
 export class MoviesList {
+
   render() {
-    return <ul>
-      { state.movies.map((movie) =>
-        <li>{movie}</li>
-       ) }
-     </ul>
+    return <Host>
+      { state.movies.map((movie) => {
+        return <movie-list-item movie={movie}></movie-list-item>
+       })
+      }
+     </Host>
   }
 }

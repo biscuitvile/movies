@@ -6,6 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface MovieListItem {
+        "movie": { title: string, isEditing: boolean };
+    }
     interface MoviesList {
     }
     interface MyComponent {
@@ -26,6 +29,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLMovieListItemElement extends Components.MovieListItem, HTMLStencilElement {
+    }
+    var HTMLMovieListItemElement: {
+        prototype: HTMLMovieListItemElement;
+        new (): HTMLMovieListItemElement;
+    };
     interface HTMLMoviesListElement extends Components.MoviesList, HTMLStencilElement {
     }
     var HTMLMoviesListElement: {
@@ -45,12 +54,16 @@ declare global {
         new (): HTMLNewMovieFormElement;
     };
     interface HTMLElementTagNameMap {
+        "movie-list-item": HTMLMovieListItemElement;
         "movies-list": HTMLMoviesListElement;
         "my-component": HTMLMyComponentElement;
         "new-movie-form": HTMLNewMovieFormElement;
     }
 }
 declare namespace LocalJSX {
+    interface MovieListItem {
+        "movie"?: { title: string, isEditing: boolean };
+    }
     interface MoviesList {
     }
     interface MyComponent {
@@ -70,6 +83,7 @@ declare namespace LocalJSX {
     interface NewMovieForm {
     }
     interface IntrinsicElements {
+        "movie-list-item": MovieListItem;
         "movies-list": MoviesList;
         "my-component": MyComponent;
         "new-movie-form": NewMovieForm;
@@ -79,6 +93,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "movie-list-item": LocalJSX.MovieListItem & JSXBase.HTMLAttributes<HTMLMovieListItemElement>;
             "movies-list": LocalJSX.MoviesList & JSXBase.HTMLAttributes<HTMLMoviesListElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "new-movie-form": LocalJSX.NewMovieForm & JSXBase.HTMLAttributes<HTMLNewMovieFormElement>;

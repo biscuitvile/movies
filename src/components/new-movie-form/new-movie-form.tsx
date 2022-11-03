@@ -14,7 +14,7 @@ export class NewMovieForm {
 
     state.movies = [
       ...state.movies,
-      title
+      { title: title, isEditing: false }
     ]
 
     this.newMovieInput.focus();
