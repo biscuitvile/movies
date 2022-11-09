@@ -5,25 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Movie } from "./store";
 export namespace Components {
     interface MovieListItem {
-        "movie": { title: string, year: string, isEditing: boolean };
+        "movie": Movie;
     }
     interface MoviesList {
-    }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
     }
     interface NewMovieForm {
     }
@@ -41,12 +28,6 @@ declare global {
         prototype: HTMLMoviesListElement;
         new (): HTMLMoviesListElement;
     };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLNewMovieFormElement extends Components.NewMovieForm, HTMLStencilElement {
     }
     var HTMLNewMovieFormElement: {
@@ -56,36 +37,20 @@ declare global {
     interface HTMLElementTagNameMap {
         "movie-list-item": HTMLMovieListItemElement;
         "movies-list": HTMLMoviesListElement;
-        "my-component": HTMLMyComponentElement;
         "new-movie-form": HTMLNewMovieFormElement;
     }
 }
 declare namespace LocalJSX {
     interface MovieListItem {
-        "movie"?: { title: string, year: string, isEditing: boolean };
+        "movie"?: Movie;
     }
     interface MoviesList {
-    }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
     }
     interface NewMovieForm {
     }
     interface IntrinsicElements {
         "movie-list-item": MovieListItem;
         "movies-list": MoviesList;
-        "my-component": MyComponent;
         "new-movie-form": NewMovieForm;
     }
 }
@@ -95,7 +60,6 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "movie-list-item": LocalJSX.MovieListItem & JSXBase.HTMLAttributes<HTMLMovieListItemElement>;
             "movies-list": LocalJSX.MoviesList & JSXBase.HTMLAttributes<HTMLMoviesListElement>;
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "new-movie-form": LocalJSX.NewMovieForm & JSXBase.HTMLAttributes<HTMLNewMovieFormElement>;
         }
     }

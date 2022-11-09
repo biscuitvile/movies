@@ -1,5 +1,11 @@
 import { Component, Host, h } from '@stencil/core';
-import state from '../../store';
+import { addMovie } from '../../store';
+
+function getAndClearValueFromInput(ref: HTMLInputElement): string {
+  let value: string = ref.value;
+  ref.value = "";
+  return value;
+}
 
 @Component({
   tag: 'new-movie-form',
@@ -10,15 +16,10 @@ export class NewMovieForm {
   newMovieYearInput!: HTMLInputElement;
 
   addMovie() {
-    let title: string = this.newMovieTitleInput.value;
-    let year: string = this.newMovieYearInput.value;
-    this.newMovieTitleInput.value = "";
-    this.newMovieYearInput.value = "";
-
-    state.movies = [
-      ...state.movies,
-      { title: title, year: year, isEditing: false }
-    ]
+    addMovie(
+      getAndClearValueFromInput(this.newMovieTitleInput),
+      getAndClearValueFromInput(this.newMovieYearInput)
+    );
 
     this.newMovieTitleInput.focus();
   }
@@ -27,10 +28,10 @@ export class NewMovieForm {
     return <Host>
       <input type="text"
         autofocus
-        ref={ (el) => this.newMovieTitleInput = el as HTMLInputElement }></input>
+        ref={ (el: HTMLInputElement) => this.newMovieTitleInput = el }></input>
 
       <input type="text"
-        ref={ (el) => this.newMovieYearInput = el as HTMLInputElement }></input>
+        ref={ (el: HTMLInputElement) => this.newMovieYearInput = el }></input>
 
       <button type="submit" onClick={ () => this.addMovie() }>Add</button>
     </Host>
