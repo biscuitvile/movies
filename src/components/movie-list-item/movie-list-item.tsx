@@ -1,12 +1,12 @@
 import { Component, Prop, h } from '@stencil/core';
-import state from '../../store';
+import state, { Movie } from '../../store';
 
 @Component({
   tag: 'movie-list-item',
   shadow: true,
 })
 export class MovieListItem {
-  @Prop({ mutable: true }) movie: { title: string, year: string, isEditing: boolean }
+  @Prop({ mutable: true }) movie: Movie;
   newMovieTitleInput!: HTMLInputElement;
   newMovieYearInput!: HTMLInputElement;
 

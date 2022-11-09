@@ -1,7 +1,5 @@
 import { Component, Host, h } from '@stencil/core';
-import state from '../../store';
-
-type Movie = { title: string, year: string, isEditing: boolean };
+import state, { Movie } from '../../store';
 
 @Component({
   tag: 'movies-list',
